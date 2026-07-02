@@ -53,103 +53,31 @@
                         <p>Complete the form below and we will receive your enquiry.</p>
                     </div>
 
-                    <form action="{{ route('contact.store') }}" method="POST" class="service-request-form" novalidate>
+                    <form action="{{ route('contact.store') }}" method="POST" class="service-request-form" data-contact-form novalidate>
                         @csrf
 
-                        <script>
-                            (function () {
-                                const form = document.querySelector('.service-request-form');
-                                const emailInput = document.querySelector('input[name="email"]');
-
-                                if (!form || !emailInput) return;
-
-                                function getFieldWrapper(field) {
-                                    return field.closest('.form-field');
-                                }
-
-                                function showEmailError(field) {
-                                    const wrapper = getFieldWrapper(field);
-                                    const error = wrapper?.querySelector('.field-error');
-
-                                    wrapper?.classList.add('form-field--error');
-                                    field.setAttribute('aria-invalid', 'true');
-                                    if (error) error.textContent = field.type === 'email'
-                                        ? 'Enter valid email address'
-                                        : 'Required';
-                                }
-
-                                function clearEmailError(field) {
-                                    const wrapper = getFieldWrapper(field);
-                                    const error = wrapper?.querySelector('.field-error');
-
-                                    wrapper?.classList.remove('form-field--error');
-                                    field.removeAttribute('aria-invalid');
-                                    if (error) error.textContent = '';
-                                }
-
-                                emailInput.addEventListener('input', () => {
-                                    if (emailInput.value !== '' && !emailInput.checkValidity()) {
-                                        emailInput.setCustomValidity('');
-                                        showEmailError(emailInput);
-                                    } else if (emailInput.value !== '') {
-                                        clearEmailError(emailInput);
-                                    }
-                                });
-
-                                emailInput.addEventListener('change', () => {
-                                    if (emailInput.checkValidity()) {
-                                        clearEmailError(emailInput);
-                                    }
-                                });
-
-                                function validateEmailAndPreventIfInvalid() {
-                                    if (emailInput.value === '' || !emailInput.checkValidity()) {
-                                        emailInput.focus();
-                                        showEmailError(emailInput);
-                                        return false;
-                                    }
-
-                                    clearEmailError(emailInput);
-                                    return true;
-                                }
-
-                                form.addEventListener('submit', (e) => {
-                                    if (!validateEmailAndPreventIfInvalid()) {
-                                        e.preventDefault();
-                                    }
-                                });
-                            })();
-                        </script>
-
-
                         <div class="form-row form-row--full">
-                            <div class="form-field @error('name') form-field--error @enderror">
+                            <div class="form-field {{ $errors->has('name') ? 'form-field--error' : '' }}">
                                 <label>Your name <span class="required">*</span></label>
                                 <input type="text" name="name" value="{{ old('name') }}" required>
-                                @error('name')
-                                    <span class="field-error" aria-live="polite">Required</span>
-                                @enderror
+                                <span class="field-error" aria-live="polite">{{ $errors->has('name') ? 'Required' : '' }}</span>
                             </div>
 
-                            <div class="form-field @error('email') form-field--error @enderror">
+                            <div class="form-field {{ $errors->has('email') ? 'form-field--error' : '' }}">
                                 <label>Email <span class="required">*</span></label>
-                                <input type="email" name="email" value="{{ old('email') }}" required>
-                                @error('email')
-                                    <span class="field-error" aria-live="polite">Required</span>
-                                @enderror
+                                <input type="email" name="email" value="{{ old('email') }}" title="Enter valid email address" required>
+                                <span class="field-error" aria-live="polite">{{ $errors->has('email') ? (old('email') ? 'Enter valid email address' : 'Required') : '' }}</span>
                             </div>
                         </div>
 
                         <div class="form-row form-row--full">
-                            <div class="form-field @error('phone') form-field--error @enderror">
+                            <div class="form-field {{ $errors->has('phone') ? 'form-field--error' : '' }}">
                                 <label>Phone <span class="optional">optional</span></label>
                                 <input type="text" name="phone" value="{{ old('phone') }}">
-                                @error('phone')
-                                    <span class="field-error" aria-live="polite">Required</span>
-                                @enderror
+                                <span class="field-error" aria-live="polite">{{ $errors->has('phone') ? 'Required' : '' }}</span>
                             </div>
 
-                            <div class="form-field @error('subject') form-field--error @enderror">
+                            <div class="form-field {{ $errors->has('subject') ? 'form-field--error' : '' }}">
                                 <label>Subject <span class="required">*</span></label>
                                 <input
                                     type="text"
@@ -158,25 +86,125 @@
                                     placeholder="Business listing, quote request, website support..."
                                     required
                                 >
-                                @error('subject')
-                                    <span class="field-error" aria-live="polite">Required</span>
-                                @enderror
+                                <span class="field-error" aria-live="polite">{{ $errors->has('subject') ? 'Required' : '' }}</span>
                             </div>
                         </div>
 
                         <div class="form-row form-row--full">
-                            <div class="form-field @error('message') form-field--error @enderror">
+                            <div class="form-field {{ $errors->has('message') ? 'form-field--error' : '' }}">
                                 <label>Message <span class="required">*</span></label>
                                 <textarea name="message" placeholder="Please write your message here" required>{{ old('message') }}</textarea>
-                                @error('message')
-                                    <span class="field-error" aria-live="polite">Required</span>
-                                @enderror
+                                <span class="field-error" aria-live="polite">{{ $errors->has('message') ? 'Required' : '' }}</span>
                             </div>
                         </div>
 
                         <div class="form-row form-row--full">
                             <button type="submit" class="submit-button">Submit Contact Message</button>
                         </div>
+
+                        <script>
+                            (function () {
+                                const form = document.querySelector('[data-contact-form]');
+
+                                if (!form) return;
+
+                                function getFieldWrapper(field) {
+                                    return field.closest('.form-field');
+                                }
+
+                                function getFieldError(field) {
+                                    const wrapper = getFieldWrapper(field);
+                                    let error = wrapper?.querySelector('.field-error');
+
+                                    if (!error) {
+                                        error = document.createElement('span');
+                                        error.className = 'field-error';
+                                        error.setAttribute('aria-live', 'polite');
+                                        field.insertAdjacentElement('afterend', error);
+                                    }
+
+                                    return error;
+                                }
+
+                                function getFieldMessage(field) {
+                                    if (field.validity.valueMissing || !field.value.trim()) {
+                                        return 'Required';
+                                    }
+
+                                    if (field.type === 'email') {
+                                        return 'Enter valid email address';
+                                    }
+
+                                    return 'Required';
+                                }
+
+                                function showFieldError(field) {
+                                    const wrapper = getFieldWrapper(field);
+                                    const error = getFieldError(field);
+
+                                    wrapper?.classList.add('form-field--error');
+                                    field.setAttribute('aria-invalid', 'true');
+                                    error.textContent = getFieldMessage(field);
+                                }
+
+                                function clearFieldError(field) {
+                                    const wrapper = getFieldWrapper(field);
+                                    const error = wrapper?.querySelector('.field-error');
+
+                                    wrapper?.classList.remove('form-field--error');
+                                    field.removeAttribute('aria-invalid');
+
+                                    if (error) {
+                                        error.textContent = '';
+                                    }
+                                }
+
+                                function validateField(field) {
+                                    if (field.checkValidity()) {
+                                        clearFieldError(field);
+                                        return true;
+                                    }
+
+                                    showFieldError(field);
+                                    return false;
+                                }
+
+                                form.querySelectorAll('[required]').forEach((field) => {
+                                    field.addEventListener('input', () => {
+                                        if (field.value !== '' || field.getAttribute('aria-invalid') === 'true') {
+                                            validateField(field);
+                                        }
+                                    });
+
+                                    field.addEventListener('change', () => {
+                                        if (field.checkValidity()) {
+                                            clearFieldError(field);
+                                        } else if (field.getAttribute('aria-invalid') === 'true') {
+                                            showFieldError(field);
+                                        }
+                                    });
+                                });
+
+                                form.addEventListener('submit', (event) => {
+                                    let firstInvalidField = null;
+
+                                    form.querySelectorAll('[required]').forEach((field) => {
+                                        if (validateField(field)) {
+                                            return;
+                                        }
+
+                                        if (!firstInvalidField) {
+                                            firstInvalidField = field;
+                                        }
+                                    });
+
+                                    if (firstInvalidField) {
+                                        event.preventDefault();
+                                        firstInvalidField.focus();
+                                    }
+                                });
+                            })();
+                        </script>
                     </form>
                 </div>
             </div>
@@ -186,4 +214,3 @@
     @include('partials.footer')
 </body>
 </html>
-

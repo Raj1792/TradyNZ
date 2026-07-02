@@ -8,12 +8,12 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $heroPath = public_path('Images/hero');
+        $heroPath = public_path('images/hero');
         $imageUrls = [];
 
         if (File::isDirectory($heroPath)) {
             foreach (File::files($heroPath) as $image) {
-                $imageUrls[] = asset('Images/hero/' . $image->getFilename());
+                $imageUrls[] = asset('images/hero/' . $image->getFilename());
             }
         }
 

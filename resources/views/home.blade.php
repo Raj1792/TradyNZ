@@ -57,7 +57,7 @@
     >
 
     <div class="location-field">
-        <span class="location-icon">📍</span>
+        <span class="location-icon">&#128205;</span>
 
         <input 
             type="text"
@@ -139,56 +139,56 @@
         <div class="category-grid">
 
             <div class="category-card">
-                <img src="{{ asset('Images/categories/builder.jpg') }}" alt="Builder">
+                <img src="{{ asset('images/categories/builder.jpg') }}" alt="Builder">
                 <div class="category-content">
                     <h3>Home Services</h3>
                     <p>Find trusted professionals for repairs, maintenance, and home improvement projects.</p>
-                    <a href="{{ route('businesses.index', ['industry' => 'Construction & Trades']) }}">View category →</a>
+                    <a href="{{ route('businesses.index', ['industry' => 'Construction & Trades']) }}">View category &rarr;</a>
                 </div>
             </div>
 
             <div class="category-card">
-                <img src="{{ asset('Images/categories/automative.jpg') }}" alt="Automative">
+                <img src="{{ asset('images/categories/automative.jpg') }}" alt="Automotive">
                 <div class="category-content">
                     <h3>Automotive</h3>
                     <p>Connect with experts for vehicle repairs, servicing, and maintenance needs.</p>
-                    <a href="{{ route('businesses.index', ['industry' => 'Automotive']) }}">View category →</a>
+                    <a href="{{ route('businesses.index', ['industry' => 'Automotive']) }}">View category &rarr;</a>
                 </div>
             </div>
 
             <div class="category-card">
-                <img src="{{ asset('Images/categories/beautycare.jpg') }}" alt="Beauty Care">
+                <img src="{{ asset('images/categories/beautycare.jpg') }}" alt="Beauty Care">
                 <div class="category-content">
                     <h3>Beauty & Personal Care</h3>
                     <p>Discover salons and specialists for grooming, beauty, and self-care services.</p>
-                    <a href="{{ route('businesses.index', ['industry' => 'Beauty & Wellness']) }}">View category →</a>
+                    <a href="{{ route('businesses.index', ['industry' => 'Beauty & Wellness']) }}">View category &rarr;</a>
                 </div>
             </div>
 
             <div class="category-card">
-                <img src="{{ asset('Images/categories/food&hospitality.jpg') }}" alt="Food & Hospitality">
+                <img src="{{ asset('images/categories/food-hospitality.jpg') }}" alt="Food & Hospitality">
                 <div class="category-content">
                     <h3>Food & Hospitality</h3>
-                    <p>Explore restaurants, cafés, and catering services for every occasion.</p>
-                    <a href="{{ route('businesses.index', ['industry' => 'Food & Hospitality']) }}">View category →</a>
+                    <p>Explore restaurants, cafes, and catering services for every occasion.</p>
+                    <a href="{{ route('businesses.index', ['industry' => 'Food & Hospitality']) }}">View category &rarr;</a>
                 </div>
             </div>
 
             <div class="category-card">
-                <img src="{{ asset('Images/categories/professionalservices.jpg') }}" alt="Professional Services">
+                <img src="{{ asset('images/categories/professionalservices.jpg') }}" alt="Professional Services">
                 <div class="category-content">
                     <h3>Professional Services</h3>
                     <p>Access qualified experts for legal, financial, and business-related services.</p>
-                    <a href="{{ route('businesses.index', ['industry' => 'Professional Services']) }}">View category →</a>
+                    <a href="{{ route('businesses.index', ['industry' => 'Professional Services']) }}">View category &rarr;</a>
                 </div>
             </div>
 
             <div class="category-card">
-                <img src="{{ asset('Images/categories/techservices.jpg') }}" alt="Tech Services">
+                <img src="{{ asset('images/categories/techservices.jpg') }}" alt="Tech Services">
                 <div class="category-content">
                     <h3>IT & Technology</h3>
                     <p>Get support for digital solutions, including web development, repairs, and IT support.</p>
-                    <a href="{{ route('businesses.index', ['industry' => 'IT & Technology']) }}">View category →</a>
+                    <a href="{{ route('businesses.index', ['industry' => 'IT & Technology']) }}">View category &rarr;</a>
                 </div>
             </div>
 

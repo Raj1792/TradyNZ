@@ -215,7 +215,7 @@ button {
     content: "";
     width: 8px;
     height: 6px;
-    background-image: url("../images/✓.svg");
+    background-image: url("../images/check.svg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
