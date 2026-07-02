@@ -9,7 +9,7 @@
 </head>
 <body>
     <nav class="page-navbar">
-        <a href="{{ route('home') }}" class="brand-link">New Zealand Businesses</a>
+        <a href="{{ route('home') }}" class="brand-link">NZ Businesses</a>
         <div class="page-nav-links">
             <a href="{{ route('businesses.index') }}">Browse</a>
             <a href="{{ route('contact.create') }}">Contact</a>
