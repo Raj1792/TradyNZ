@@ -10,6 +10,17 @@ body {
     color: #111827;
 }
 
+body.quote-request-page {
+    font-family: "Inter", sans-serif;
+}
+
+body.quote-request-page button,
+body.quote-request-page input,
+body.quote-request-page select,
+body.quote-request-page textarea {
+    font-family: inherit;
+}
+
 .job-page {
     max-width: 1380px;
     background: #ffffff;
@@ -86,7 +97,7 @@ body {
     left: 14px;
     top: 34px;
     width: 2px;
-    height: 52px;
+    height: 92px;
     background: #d1d5db;
 }
 
@@ -106,8 +117,9 @@ body {
 
 .step strong {
     display: block;
-    font-size: 13px;
+    font-size: 12px;
     margin-bottom: 3px;
+    font-weight: 500;
 }
 
 .step small {
@@ -121,6 +133,119 @@ body {
 .step.active span {
     background: #2563eb;
     color: #ffffff;
+}
+
+/* Quote request sidebar steps */
+.quote-request-page .job-sidebar .sidebar-heading {
+    margin-bottom: 18px;
+}
+
+.quote-request-page .job-sidebar .sidebar-heading h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.quote-request-page .job-sidebar .sidebar-heading span {
+    font-size: 11px;
+    font-weight: 400;
+    color: #666666;
+}
+
+.quote-request-page .step-list {
+    padding-top: 0;
+    list-style: none;
+}
+
+.quote-request-page .step-list__item.step-list__item {
+    position: relative;
+    display: flex;
+    gap: 18px;
+    margin-bottom: 4px;
+    min-height: 123px;
+}
+
+.quote-request-page .step-list__item--available {
+    cursor: pointer;
+}
+
+.quote-request-page .step-list__item--available:focus-visible {
+    outline: 2px solid rgba(37, 99, 235, 0.18);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.quote-request-page .step-list__item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 31px;
+    left: 13px;
+    width: 2px;
+    height: 92px;
+    background-color: #d9d9d9;
+}
+
+.quote-request-page .step-list__number {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    width: 28px;
+}
+
+.quote-request-page .step-list__number span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #e5e5e5;
+}
+
+.quote-request-page .step-list__item--active .step-list__number span {
+    background-color: #2563eb;
+}
+
+.quote-request-page .step-list__item--complete .step-list__number span {
+    font-size: 0;
+    background-color: #38b873;
+}
+
+.quote-request-page .step-list__item--complete .step-list__number span::before {
+    content: "";
+    width: 8px;
+    height: 6px;
+    background-image: url("../images/check.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.quote-request-page .step-list__content h2 {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #666666;
+}
+
+.quote-request-page .step-list__item--active .step-list__content h2 {
+    color: #2563eb;
+}
+
+.quote-request-page .step-list__item--complete .step-list__content h2 {
+    color: #38b873;
+}
+
+.quote-request-page .step-list__content p {
+    margin-bottom: 0;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #999999;
 }
 
 /* Form Area */
@@ -143,27 +268,39 @@ body {
 .form-heading p {
     color: #6b7280;
     font-size: 14px;
+    margin-bottom: 24px;
 }
 
 /* Progress */
-.progress-bar {
-    margin: 24px 0 28px;
-    height: 4px;
-    background: #e5e7eb;
-    position: relative;
+.quote-request-page .step-progress {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-top: 6px;
 }
 
-.progress-fill {
-    width: 33.3%;
+.quote-request-page .step-progress__bar {
+    width: 115px;
+    max-width: 100%;
     height: 4px;
-    background: #2563eb;
+    border-radius: 2px;
+    background-color: #d1d1d1;
 }
 
-.progress-bar p {
-    text-align: center;
-    margin-top: -2px;
-    font-size: 12px;
-    color: #6b7280;
+.quote-request-page .step-progress__bar--active {
+    background-color: #2563eb;
+}
+
+.quote-request-page .step-progress__bar--complete {
+    background-color: #38b873;
+}
+
+.quote-request-page .step-progress__label {
+    margin-left: 31px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #666666;
 }
 
 /* Form */
@@ -220,6 +357,93 @@ body {
 textarea {
     min-height: 110px;
     resize: vertical;
+}
+
+/* Quote fields matched to the business registration form */
+.quote-request-page .job-form .form-group {
+    position: relative;
+}
+
+.quote-request-page .job-form .form-group label {
+    margin-bottom: 0;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #333333;
+}
+
+.quote-request-page .job-form .form-group label span {
+    color: #e24b4a;
+}
+
+.quote-request-page .job-form .form-group input,
+.quote-request-page .job-form .form-group select,
+.quote-request-page .job-form .form-group textarea {
+    width: 100%;
+    height: 38px;
+    margin-top: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    padding: 0 12px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #1a1a1a;
+    background-color: #ffffff;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.quote-request-page .job-form .form-group textarea {
+    height: 96px;
+    min-height: 96px;
+    padding-top: 18px;
+    padding-bottom: 10px;
+    resize: vertical;
+    background-color: #ededf0;
+    border-color: #d6d6db;
+}
+
+.quote-request-page .job-form .form-group input::placeholder,
+.quote-request-page .job-form .form-group textarea::placeholder {
+    color: #a6a6ab;
+}
+
+.quote-request-page .job-form .form-group textarea::placeholder {
+    font-size: 20px;
+}
+
+.quote-request-page .job-form .form-group input:focus,
+.quote-request-page .job-form .form-group select:focus,
+.quote-request-page .job-form .form-group textarea:focus {
+    outline: 2px solid rgba(37, 99, 235, 0.18);
+    border-color: #2563eb;
+    box-shadow: none;
+}
+
+.quote-request-page .job-form .form-field--error input,
+.quote-request-page .job-form .form-field--error select,
+.quote-request-page .job-form .form-field--error textarea {
+    border-color: #e24b4a;
+}
+
+.quote-request-page .job-form .form-field--error input:focus,
+.quote-request-page .job-form .form-field--error select:focus,
+.quote-request-page .job-form .form-field--error textarea:focus {
+    outline-color: rgba(226, 75, 74, 0.18);
+    border-color: #e24b4a;
+}
+
+.quote-request-page .job-form .field-error {
+    display: none;
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #e24b4a;
+}
+
+.quote-request-page .job-form .form-field--error .field-error {
+    display: block;
 }
 
 .upload-box {
@@ -300,14 +524,6 @@ textarea {
     color: #22c55e;
 }
 
-.progress-fill.step-two {
-    width: 66.6%;
-}
-
-.progress-fill.step-three {
-    width: 100%;
-}
-
 .form-section-title {
     font-size: 15px;
     margin-bottom: 16px;
@@ -360,6 +576,46 @@ textarea {
 
 .back-btn:hover {
     background: #f3f4f6;
+}
+
+/* Quote buttons matched to the business registration form */
+.quote-request-page .job-form .continue-btn,
+.quote-request-page .job-form .back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: none;
+}
+
+.quote-request-page .job-form .continue-btn {
+    border: 0;
+    background-color: #fbbf24;
+}
+
+.quote-request-page .job-form .continue-btn:hover {
+    background-color: #fbbf24;
+    transform: none;
+}
+
+.quote-request-page .job-form .back-btn {
+    border: 1px solid #cccccc;
+    background-color: transparent;
+}
+
+.quote-request-page .job-form .back-btn:hover {
+    background-color: transparent;
+}
+
+.quote-request-page .job-form .form-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .action-link {
@@ -434,6 +690,14 @@ textarea {
     font-weight: 700;
 }
 
+.review-grid .review-description {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #111827;
+    white-space: pre-wrap;
+}
+
 .review-full {
     grid-column: span 2;
 }
@@ -469,6 +733,18 @@ textarea {
     min-height: auto;
 }
 
+@media (max-width: 1100px) {
+    .quote-request-page .step-progress__bar {
+        flex: 1 1 72px;
+        width: auto;
+    }
+
+    .quote-request-page .step-progress__label {
+        margin-left: 12px;
+        white-space: nowrap;
+    }
+}
+
 @media (max-width: 900px) {
     .job-page {
         margin: 0;
@@ -488,6 +764,62 @@ textarea {
     .job-sidebar,
     .job-form-area {
         padding: 24px;
+    }
+
+    .quote-request-page .step-progress {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .quote-request-page .step-progress__bar {
+        width: 100%;
+    }
+
+    .quote-request-page .step-progress__label {
+        grid-column: 1 / -1;
+        margin: 3px 0 0;
+    }
+
+    .quote-request-page .step-list {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: thin;
+    }
+
+    .quote-request-page .step-list__item.step-list__item {
+        flex: 0 0 142px;
+        min-height: 44px;
+        gap: 10px;
+    }
+
+    .quote-request-page .step-list__item::after {
+        display: none;
+    }
+}
+
+@media (max-width: 760px) {
+    .quote-request-page .job-form .form-actions {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 640px) {
+    .quote-request-page .job-sidebar {
+        padding: 20px 18px 18px;
+    }
+
+    .quote-request-page .step-list__item.step-list__item {
+        flex-basis: 132px;
+    }
+}
+
+@media (max-width: 420px) {
+    .quote-request-page .step-list__item.step-list__item {
+        flex-basis: 124px;
     }
 }
 

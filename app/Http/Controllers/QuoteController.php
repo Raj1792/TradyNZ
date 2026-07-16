@@ -37,16 +37,24 @@ class QuoteController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'customer_name' => ['required', 'string', 'max:120'],
-            'email' => ['required', 'email', 'max:120'],
-            'phone' => ['required', 'string', 'max:40'],
-            'service' => ['required', 'string', 'max:120'],
-            'location' => ['required', 'string', 'max:120'],
-            'preferred_business' => ['required', 'string', 'max:120'],
-            'description' => ['required', 'string', 'max:1500'],
-            'budget' => ['nullable', 'string', 'max:80'],
-        ]);
+        $data = $request->validate(
+            [
+                'customer_name' => ['required', 'string', 'max:120'],
+                'email' => ['required', 'email', 'max:120'],
+                'phone' => ['required', 'string', 'max:40', 'regex:/^(?=(?:.*\d){7,})[\d\s+()\-]+$/'],
+                'service' => ['required', 'string', 'max:120'],
+                'location' => ['required', 'string', 'max:120'],
+                'preferred_business' => ['required', 'string', 'max:120'],
+                'description' => ['required', 'string', 'max:1500'],
+                'budget' => ['nullable', 'string', 'max:80'],
+            ],
+            [
+                'email.required' => 'Required',
+                'email.email' => 'Enter valid email address',
+                'phone.required' => 'Required',
+                'phone.regex' => 'Enter valid phone number',
+            ]
+        );
 
         $quoteRequest = QuoteRequest::create($data);
 
